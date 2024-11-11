@@ -1,0 +1,48 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+# Membuka browser tanpa user-agent mobile
+driver = webdriver.Chrome()
+driver.get("https://maps.app.goo.gl/iifWLTTh7v2SZ7SC9")
+time.sleep(5)
+
+# Menambahkan waktu tunggu eksplisit
+wait = WebDriverWait(driver, 15)
+
+# Mengambil alamat
+try:
+    alamat = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "Io6YTe"))).text
+    print("Alamat:", alamat)
+except:
+    print("Alamat tidak ditemukan")
+
+# Scroll down untuk memicu pemuatan elemen tambahan
+for _ in range(3):  # Scroll 3 kali untuk memastikan lebih banyak elemen dimuat
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2)
+
+# Menambahkan pengecekan XPath untuk nomor telepon yang lebih tepat
+try:
+    # Coba mencari nomor telepon dengan XPath yang lebih umum
+    nomor_telepon_element = WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.XPATH, "//a[contains(@href, 'tel:')]"))
+    )
+    nomor_telepon = nomor_telepon_element.get_attribute("href").replace("tel:", "")
+    print("Nomor Telepon:", nomor_telepon)
+except Exception as e:
+    print("Nomor telepon tidak ditemukan", e)
+
+# Mengambil jam buka dengan XPath alternatif
+try:
+    jam_buka = wait.until(
+        EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Tutup') or contains(text(), 'Buka')]/following-sibling::span"))
+    ).text
+    print("Jam Buka:", jam_buka)
+except:
+    print("Jam buka tidak ditemukan")
+
+# Menutup browser
+driver.quit()
