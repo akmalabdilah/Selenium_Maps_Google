@@ -6,4 +6,4 @@ Setelah semua sudah siap kita kita download crome drive atau kalian basa ambil f
 
 ![Gambar 1](screenshoot/1.png)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FSnJx4sWs_0?si=Yhb4rmo-UdVi2vDa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![YouTube Tutorial](https://img.youtube.com/vi/FSnJx4sWs_0/0.jpg)](https://www.youtube.com/watch?v=FSnJx4sWs_0)
